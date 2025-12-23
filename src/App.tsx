@@ -6,6 +6,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Dashboard from "@/pages/Dashboard";
+import Analytics from "@/pages/Analytics";
+import Insights from "@/pages/Insights";
+import Customers from "@/pages/Customers";
+import GenericPage from "@/pages/GenericPage";
 
 function App() {
   return (
@@ -13,16 +17,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
-          <Route path="analytics" element={<Dashboard />} /> 
-          <Route path="insights" element={<Dashboard />} /> 
-          <Route path="updates" element={<Dashboard />} /> 
-          <Route path="customers" element={<Dashboard />} /> 
-          <Route path="store" element={<Dashboard />} /> 
-          <Route path="discounts" element={<Dashboard />} /> 
-          <Route path="integration" element={<Dashboard />} /> 
-          <Route path="feedback" element={<Dashboard />} /> 
-          <Route path="settings" element={<Dashboard />} /> 
-          <Route path="help" element={<Dashboard />} /> 
+          <Route path="analytics" element={<Analytics />} /> 
+          <Route path="insights" element={<Insights />} /> 
+          <Route path="updates" element={<GenericPage title="Updates" />} /> 
+          <Route path="customers" element={<Customers />} /> 
+          <Route path="store" element={<GenericPage title="Store" />} /> 
+          <Route path="discounts" element={<GenericPage title="Discounts" />} /> 
+          <Route path="integration" element={<GenericPage title="Integration" />} /> 
+          <Route path="feedback" element={<GenericPage title="Feedback" />} /> 
+          <Route path="settings" element={<GenericPage title="Settings" />} /> 
+          <Route path="help" element={<GenericPage title="Help Desk" />} /> 
         </Route>
       </Routes>
     </BrowserRouter>
