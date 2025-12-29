@@ -3,7 +3,7 @@
  * @link https://github.com/AshrafMorningstar
  */
 
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { 
   LayoutDashboard, 
   PieChart, 
@@ -16,9 +16,11 @@ import {
   MessageSquare, 
   Settings, 
   HelpCircle,
-  Command
+  Command,
+  ChevronRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const MENU_ITEMS = [
   { label: "Dashboard", icon: LayoutDashboard, path: "/" },
@@ -42,78 +44,84 @@ const GENERAL_ITEMS = [
 
 export function Sidebar() {
   return (
-    <aside className="w-[260px] h-screen fixed left-0 top-0 border-r border-border bg-background flex flex-col z-40">
-      <div className="h-16 flex items-center px-6 border-b border-border/40">
-        <div className="flex items-center gap-2 text-primary font-bold text-xl tracking-tight">
-          <div className="bg-primary text-white p-1 rounded-lg">
-            <Command size={18} />
+    <aside className="w-[280px] h-screen fixed left-0 top-0 border-r bg-card/50 backdrop-blur-xl flex flex-col z-40 shadow-xl shadow-primary/5">
+      <div className="h-20 flex items-center px-8 border-b border-border/40">
+        <div className="flex items-center gap-3 text-foreground font-bold text-xl tracking-tight">
+          <div className="bg-gradient-to-br from-primary to-violet-700 text-white p-2 rounded-xl shadow-lg shadow-primary/20">
+            <Command size={20} />
           </div>
-          SellPilot
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
+            SellPilot
+          </span>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto py-6 px-4 space-y-8">
-        <section>
-          <div className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider mb-3 px-2">Menu</div>
-          <div className="space-y-1">
-            {MENU_ITEMS.map((item) => (
-              <NavItem key={item.path} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <div className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider mb-3 px-2">Products</div>
-          <div className="space-y-1">
-            {PRODUCT_ITEMS.map((item) => (
-              <NavItem key={item.path} item={item} />
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <div className="text-xs font-semibold text-muted-foreground/70 uppercase tracking-wider mb-3 px-2">General</div>
-          <div className="space-y-1">
-            {GENERAL_ITEMS.map((item) => (
-              <NavItem key={item.path} item={item} />
-            ))}
-          </div>
-        </section>
+      <div className="flex-1 overflow-y-auto py-8 px-5 space-y-9">
+        <MenuSection title="Menu" items={MENU_ITEMS} />
+        <MenuSection title="Products" items={PRODUCT_ITEMS} />
+        <MenuSection title="General" items={GENERAL_ITEMS} />
       </div>
       
-      <div className="p-4 border-t border-border/40">
-        <div className="bg-secondary/50 rounded-xl p-4 flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500"></div>
-            <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-medium truncate">Ashraf Morningstar</p>
+      <div className="p-5 border-t border-border/40">
+        <button className="w-full bg-secondary/30 hover:bg-secondary/60 transition-colors rounded-2xl p-4 flex items-center gap-3 group border border-transparent hover:border-border">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-violet-500 to-fuchsia-500 shadow-md ring-2 ring-background group-hover:ring-primary/20 transition-all"></div>
+            <div className="flex-1 overflow-hidden text-left">
+                <p className="text-sm font-semibold truncate text-foreground group-hover:text-primary transition-colors">Ashraf Morningstar</p>
                 <p className="text-xs text-muted-foreground truncate">Admin Account</p>
             </div>
-        </div>
+            <ChevronRight size={16} className="text-muted-foreground group-hover:translate-x-1 transition-transform" />
+        </button>
       </div>
     </aside>
   );
 }
 
+function MenuSection({ title, items }: { title: string, items: any[] }) {
+    return (
+        <section>
+          <div className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mb-4 px-3">{title}</div>
+          <div className="space-y-1">
+            {items.map((item) => (
+              <NavItem key={item.path} item={item} />
+            ))}
+          </div>
+        </section>
+    )
+}
+
 function NavItem({ item }: { item: any }) {
+  const location = useLocation();
+  const isActive = location.pathname === item.path;
+
   return (
     <NavLink
       to={item.path}
-      className={({ isActive }) =>
-        cn(
-          "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 no-underline",
-          isActive
-            ? "bg-[#0B0D12] text-white shadow-lg shadow-gray-900/20"
-            : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
-        )
-      }
+      className="relative block group no-underline outline-none"
     >
-      <item.icon size={18} />
-      <span className="flex-1">{item.label}</span>
-      {item.badge && (
-        <span className="w-auto px-1.5 h-5 min-w-5 flex items-center justify-center rounded-full bg-primary/10 text-primary text-[10px] font-bold">
-          {item.badge}
-        </span>
+      {isActive && (
+        <motion.div
+          layoutId="activeNav"
+          className="absolute inset-0 bg-primary/10 rounded-xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
       )}
+      <div className={cn(
+        "relative flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300",
+        isActive ? "text-primary font-semibold" : "text-muted-foreground group-hover:text-foreground"
+      )}>
+        <item.icon size={20} className={cn("transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+        <span className="flex-1">{item.label}</span>
+        {item.badge && (
+          <span className={cn(
+              "px-2 py-0.5 rounded-md text-[10px] font-bold transition-all",
+              isActive ? "bg-primary text-white shadow-sm" : "bg-muted text-muted-foreground"
+          )}>
+            {item.badge}
+          </span>
+        )}
+      </div>
     </NavLink>
   );
 }

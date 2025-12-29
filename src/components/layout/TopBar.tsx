@@ -1,65 +1,38 @@
-/**
- * @author Ashraf Morningstar
- * @link https://github.com/AshrafMorningstar
- */
-import { Search, Calendar as CalendarIcon, Bell, Settings, Sun, Moon } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { Search, Bell, Sun, User } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export function TopBar() {
-  const [isDark, setIsDark] = useState(false);
-
   return (
-    <header className="h-16 sticky top-0 bg-background/80 backdrop-blur-md border-b border-border/40 px-8 flex items-center justify-between z-30 transition-all duration-300">
-      {/* Search */}
-      <div className="flex items-center w-96 relative group">
-        <div className="absolute left-3 text-muted-foreground group-focus-within:text-primary transition-colors">
-            <Search size={18} />
-        </div>
-        <Input 
-            placeholder="Search product..." 
-            className="pl-10 rounded-full bg-secondary/50 border-transparent focus:bg-background focus:border-primary/20 hover:bg-secondary/80 transition-all"
-        />
-      </div>
+    <header className="h-20 px-8 flex items-center justify-between sticky top-0 z-30 pt-4 pb-2">
+       <div className="flex-1 max-w-xl">
+          <div className="relative group">
+             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors" size={18} />
+             <input 
+                type="text" 
+                placeholder="Search analytics, customers, or orders..." 
+                className="w-full h-11 pl-10 pr-4 rounded-xl bg-card/60 border border-border/60 focus:bg-card focus:border-primary/50 focus:ring-4 focus:ring-primary/10 outline-none transition-all placeholder:text-muted-foreground/60 text-sm font-medium shadow-sm backdrop-blur-sm"
+             />
+          </div>
+       </div>
 
-      {/* Right Actions */}
-      <div className="flex items-center gap-4">
-        {/* Date Range Pill (Mock) */}
-        <button className="flex items-center gap-2 px-4 py-2 bg-white border border-border rounded-full text-sm font-medium text-foreground hover:bg-secondary/50 hover:border-primary/30 transition-all hover:shadow-sm group">
-            <CalendarIcon size={16} className="text-muted-foreground group-hover:text-primary transition-colors" />
-            <span className="tabular-nums">Dec 23 - Dec 30</span>
-        </button>
-
-        <div className="h-6 w-px bg-border/60 mx-1"></div>
-
-        {/* Theme Toggle */}
-        <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground hover:text-foreground" onClick={() => setIsDark(!isDark)}>
-            {isDark ? <Moon size={20} /> : <Sun size={20} />}
-        </Button>
-
-        {/* Notifications */}
-        <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground hover:text-foreground relative">
-            <Bell size={20} />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-background"></span>
-        </Button>
-
-        {/* Settings */}
-        <Button variant="ghost" size="icon" className="rounded-full text-muted-foreground hover:text-foreground">
-            <Settings size={20} />
-        </Button>
-
-        {/* User Menu */}
-        <div className="pl-2 border-l border-border/60 ml-1">
-             <button className="flex items-center gap-3 hover:bg-secondary/50 p-1.5 rounded-full transition-colors pl-1">
-                <img 
-                    src="https://github.com/shadcn.png" 
-                    alt="User" 
-                    className="w-8 h-8 rounded-full border border-border shadow-sm"
-                />
-             </button>
-        </div>
-      </div>
+       <div className="flex items-center gap-4 ml-6">
+          <IconButton icon={Sun} />
+          <div className="relative">
+            <IconButton icon={Bell} />
+            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-destructive rounded-full border-2 border-background animate-pulse"></span>
+          </div>
+       </div>
     </header>
-  );
+  )
+}
+
+function IconButton({ icon: Icon, className }: { icon: any, className?: string }) {
+    return (
+        <button className={cn(
+            "w-11 h-11 rounded-full flex items-center justify-center bg-card border border-border/60 text-muted-foreground hover:text-foreground hover:bg-secondary/80 hover:border-border hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300",
+            className
+        )}>
+            <Icon size={20} />
+        </button>
+    )
 }

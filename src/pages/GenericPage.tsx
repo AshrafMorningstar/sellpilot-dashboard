@@ -1,3 +1,4 @@
+import { Card, CardContent } from "@/components/ui/card";
 
 interface PageProps {
     title: string;
@@ -5,17 +6,18 @@ interface PageProps {
 
 export default function GenericPage({ title }: PageProps) {
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-8 animate-fade-in">
         <h1 className="text-2xl font-bold tracking-tight text-foreground">{title}</h1>
-        <div className="min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-border/60 rounded-2xl bg-secondary/10">
-            <div className="w-16 h-16 bg-secondary/50 rounded-full flex items-center justify-center mb-4">
-                <span className="text-2xl">🚧</span>
+        
+        <Card glass className="min-h-[400px] flex flex-col items-center justify-center border-dashed">
+            <div className="w-20 h-20 bg-secondary/50 rounded-full flex items-center justify-center mb-6 animate-pulse-slow">
+                <span className="text-3xl">🚧</span>
             </div>
-            <h3 className="text-lg font-medium text-foreground">Under Construction</h3>
+            <h3 className="text-xl font-semibold text-foreground">Under Construction</h3>
             <p className="text-muted-foreground max-w-sm text-center mt-2">
-                The {title} module is currently being built. Check back soon for updates.
+                The {title} module is getting a premium makeover. Check back soon for updates.
             </p>
-        </div>
+        </Card>
     </div>
   )
 }

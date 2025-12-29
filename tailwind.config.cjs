@@ -8,11 +8,14 @@ module.exports = {
   	extend: {
   		fontFamily: {
   			sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			sm: 'calc(var(--radius) - 4px)',
+            xl: 'calc(var(--radius) + 4px)',
+            '2xl': 'calc(var(--radius) + 8px)',
   		},
   		colors: {
   			background: 'hsl(var(--background))',
@@ -54,8 +57,35 @@ module.exports = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
-  			}
-  		}
+  			},
+            success: {
+                DEFAULT: 'hsl(var(--success))',
+                foreground: 'hsl(var(--success-foreground))',
+            },
+            warning: {
+                DEFAULT: 'hsl(var(--warning))',
+                foreground: 'hsl(var(--warning-foreground))',
+            }
+  		},
+        boxShadow: {
+            'glow': '0 0 20px -5px hsl(var(--primary) / 0.5)',
+            'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        },
+        animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'slide-up': 'slideUp 0.5s ease-out forwards',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        },
+        keyframes: {
+            fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+            },
+            slideUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+        }
   	}
   },
   plugins: [tailwindcssAnimate],

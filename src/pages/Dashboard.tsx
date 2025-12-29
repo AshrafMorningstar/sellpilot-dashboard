@@ -1,32 +1,54 @@
-/**
- * @author Ashraf Morningstar
- * @link https://github.com/AshrafMorningstar
- */
-
-
-import { KPIGrid } from "@/components/dashboard/KPIGrid";
-import { RevenueChart } from "@/components/dashboard/RevenueChart";
-import { GrowthMap } from "@/components/dashboard/GrowthMap";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { SalesChart } from "@/components/dashboard/SalesChart";
 import { RecentOrders } from "@/components/dashboard/RecentOrders";
+import { WorldMap } from "@/components/dashboard/WorldMap";
+import { Users, DollarSign, CreditCard, Activity } from "lucide-react";
 
 export default function Dashboard() {
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-10">
-        <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold tracking-tight text-foreground">Dashboard</h1>
-            <div className="flex items-center gap-2">
-            </div>
+    <div className="space-y-8 animate-fade-in">
+        {/* Stats Row */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <StatCard 
+                title="Total Revenue" 
+                value="$45,231.89" 
+                trend={20.1} 
+                icon={DollarSign}
+                delay={0}
+            />
+            <StatCard 
+                title="Subscriptions" 
+                value="+2350" 
+                trend={180.1} 
+                icon={Users} 
+                delay={0.1}
+            />
+            <StatCard 
+                title="Sales" 
+                value="+12,234" 
+                trend={19} 
+                icon={CreditCard} 
+                delay={0.2}
+            />
+            <StatCard 
+                title="Active Now" 
+                value="+573" 
+                trend={201} 
+                trendLabel="since last hour"
+                icon={Activity} 
+                delay={0.3}
+            />
         </div>
 
-        <KPIGrid />
+        {/* Charts & Maps Row */}
+        <div className="grid gap-6 md:grid-cols-7">
+            <SalesChart />
+            <RecentOrders />
+        </div>
         
-        <div className="grid gap-6 md:grid-cols-7 lg:grid-cols-7">
-           <RevenueChart />
-           <GrowthMap />
-        </div>
-
-        <div className="grid grid-cols-1">
-             <RecentOrders />
+        {/* World Map Row */}
+        <div className="grid gap-6 md:grid-cols-4">
+             <WorldMap />
         </div>
     </div>
   )
