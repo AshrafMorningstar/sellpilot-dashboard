@@ -1,19 +1,16 @@
-/**
- * @author Ashraf Morningstar
- * @link https://github.com/AshrafMorningstar
- */
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import Dashboard from "@/pages/Dashboard";
 import Analytics from "@/pages/Analytics";
 import Insights from "@/pages/Insights";
 import Customers from "@/pages/Customers";
 import GenericPage from "@/pages/GenericPage";
+import SmoothScroll from "@/components/SmoothScroll";
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
+      <SmoothScroll />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
@@ -29,7 +26,7 @@ function App() {
           <Route path="help" element={<GenericPage title="Help Desk" />} /> 
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
