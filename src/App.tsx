@@ -7,7 +7,10 @@ import Store from "@/pages/Store";
 import Feedback from "@/pages/Feedback";
 import Settings from "@/pages/Settings";
 import Customers from "@/pages/Customers";
-import GenericPage from "@/pages/GenericPage";
+import Updates from "@/pages/Updates";
+import Discounts from "@/pages/Discounts";
+import Integration from "@/pages/Integration";
+import Help from "@/pages/Help";
 import SmoothScroll from "@/components/SmoothScroll";
 
 function App() {
@@ -19,14 +22,14 @@ function App() {
           <Route index element={<Dashboard />} />
           <Route path="analytics" element={<Analytics />} /> 
           <Route path="insights" element={<Insights />} /> 
-          <Route path="updates" element={<GenericPage title="Updates" />} /> 
+          <Route path="updates" element={<Updates />} /> 
           <Route path="customers" element={<Customers />} /> 
           <Route path="store" element={<Store />} /> 
-          <Route path="discounts" element={<GenericPage title="Discounts" />} /> 
-          <Route path="integration" element={<GenericPage title="Integration" />} /> 
+          <Route path="discounts" element={<Discounts />} /> 
+          <Route path="integration" element={<Integration />} /> 
           <Route path="feedback" element={<Feedback />} /> 
           <Route path="settings" element={<Settings />} /> 
-          <Route path="help" element={<GenericPage title="Help Desk" />} /> 
+          <Route path="help" element={<Help />} /> 
         </Route>
       </Routes>
     </HashRouter>
