@@ -81,15 +81,15 @@ function MenuSection({ title, items }: { title: string, items: any[] }) {
         <section>
           <div className="text-[11px] font-bold text-muted-foreground/60 uppercase tracking-widest mb-4 px-3">{title}</div>
           <div className="space-y-1">
-            {items.map((item) => (
-              <NavItem key={item.path} item={item} />
+            {items.map((item, index) => (
+              <NavItem key={item.path} item={item} index={index} />
             ))}
           </div>
         </section>
     )
 }
 
-function NavItem({ item }: { item: any }) {
+function NavItem({ item, index }: { item: any, index: number }) {
   const location = useLocation();
   const isActive = location.pathname === item.path;
 
@@ -97,6 +97,10 @@ function NavItem({ item }: { item: any }) {
     <NavLink
       to={item.path}
       className="relative block group no-underline outline-none"
+      style={{
+        animation: `slideUp 0.5s ease-out forwards ${index * 0.05}s`,
+        opacity: 0,
+      }}
     >
       {isActive && (
         <motion.div
@@ -105,19 +109,27 @@ function NavItem({ item }: { item: any }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
         />
       )}
       <div className={cn(
         "relative flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300",
         isActive ? "text-primary font-semibold" : "text-muted-foreground group-hover:text-foreground"
       )}>
-        <item.icon size={20} className={cn("transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+        <motion.div
+          whileHover={{ scale: 1.2, rotate: 5 }}
+          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        >
+          <item.icon size={20} className={cn("transition-colors", isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground")} />
+        </motion.div>
         <span className="flex-1">{item.label}</span>
         {item.badge && (
-          <span className={cn(
-              "px-2 py-0.5 rounded-md text-[10px] font-bold transition-all",
+          <span 
+            className={cn(
+              "px-2 py-0.5 rounded-md text-[10px] font-bold transition-all animate-pulse-slow",
               isActive ? "bg-primary text-white shadow-sm" : "bg-muted text-muted-foreground"
-          )}>
+            )}
+          >
             {item.badge}
           </span>
         )}

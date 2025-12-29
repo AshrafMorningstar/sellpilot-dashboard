@@ -12,11 +12,13 @@ import Discounts from "@/pages/Discounts";
 import Integration from "@/pages/Integration";
 import Help from "@/pages/Help";
 import SmoothScroll from "@/components/SmoothScroll";
+import { CommandPalette } from "@/components/ui/CommandPalette";
 
 function App() {
   return (
     <HashRouter>
       <SmoothScroll />
+      <CommandPalette />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
