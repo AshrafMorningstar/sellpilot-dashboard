@@ -73,6 +73,10 @@
   * {
     border-color: hsl(var(--border));
   }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
