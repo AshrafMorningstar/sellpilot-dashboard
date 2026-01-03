@@ -1,3 +1,11 @@
+/*
+ Copyright (c) 2026 Ashraf Morningstar
+ These are personal recreations of existing projects, developed by Ashraf Morningstar
+ for learning and skill development.
+ Original project concepts remain the intellectual property of their respective creators.
+ Repository: https://github.com/AshrafMorningstar
+*/
+
 import { Search, Bell, Sun, User } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState } from "react";

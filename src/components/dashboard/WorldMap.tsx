@@ -1,3 +1,11 @@
+/*
+ Copyright (c) 2026 Ashraf Morningstar
+ These are personal recreations of existing projects, developed by Ashraf Morningstar
+ for learning and skill development.
+ Original project concepts remain the intellectual property of their respective creators.
+ Repository: https://github.com/AshrafMorningstar
+*/
+
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { scaleLinear } from "d3-scale";

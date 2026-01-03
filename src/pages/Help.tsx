@@ -1,3 +1,11 @@
+/*
+ Copyright (c) 2026 Ashraf Morningstar
+ These are personal recreations of existing projects, developed by Ashraf Morningstar
+ for learning and skill development.
+ Original project concepts remain the intellectual property of their respective creators.
+ Repository: https://github.com/AshrafMorningstar
+*/
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Search, HelpCircle, FileText, MessageCircle, Phone, ChevronDown } from "lucide-react";
 import { useState } from "react";
